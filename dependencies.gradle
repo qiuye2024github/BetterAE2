@@ -1,0 +1,13 @@
+dependencies {
+    compileOnly libs.jetbrains.annotations
+
+    modImplementation("appeng:appliedenergistics2-forge:${project.ae2_version}") { transitive false }
+    modImplementation("maven.modrinth:extended-ae:${project.extendedae_version}-forge") { transitive false }
+
+    compileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+
+    modRuntimeOnly("maven.modrinth:jade:11.13.1+forge")
+
+    modRuntimeOnly("dev:jecharacters:1.20.1-forge-4.5.11-dev-shadow")
+}
