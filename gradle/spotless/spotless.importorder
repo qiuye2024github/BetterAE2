@@ -1,7 +1,7 @@
 #Organize Import Order
 #Sat May 27 02:13:47 CDT 2023
-0=org.gte.gtecore
-1=com.gregtechceu
+0=cn.qiuye.betterae2
+1=appeng
 1=net
 2=
 3=java
