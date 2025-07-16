@@ -52,33 +52,7 @@ public class TileExIOPortMixin extends IOPortBlockEntity implements IUpgradeable
 
         int speedUpgrades = this.getUpgrades().getInstalledUpgrades(AEItems.SPEED_CARD);
         int superSpeedUpgrades = this.getUpgrades().getInstalledUpgrades(BAE2Items.SUPER_SPEED_CARD);
-        long itemsToMove = 8192;
-
-        if (speedUpgrades > 0 && superSpeedUpgrades == 0) {
-            switch (speedUpgrades) {
-                case 1 -> itemsToMove *= 2;
-                case 2 -> itemsToMove *= 8;
-                case 3 -> itemsToMove *= 32;
-                case 4 -> itemsToMove *= 128;
-                case 5 -> itemsToMove *= 512;
-            }
-        } else if (superSpeedUpgrades > 0 && speedUpgrades == 0) {
-            switch (superSpeedUpgrades) {
-                case 1 -> itemsToMove *= 512;
-                case 2 -> itemsToMove *= 1024;
-                case 3 -> itemsToMove *= 2048;
-                case 4 -> itemsToMove *= 4096;
-                case 5 -> itemsToMove *= 8192;
-            }
-        } else if (speedUpgrades > 0 && superSpeedUpgrades > 0) {
-            switch (speedUpgrades) {
-                case 1 -> itemsToMove *= 256;
-                case 2 -> itemsToMove *= 512;
-                case 3 -> itemsToMove *= 1024;
-                case 4 -> itemsToMove *= 2048;
-                case 5 -> itemsToMove *= 4096;
-            }
-        }
+        long itemsToMove = betterae2$getItemsToMove(speedUpgrades, superSpeedUpgrades);
 
         var grid = getMainNode().getGrid();
         if (grid == null) {
@@ -107,5 +81,40 @@ public class TileExIOPortMixin extends IOPortBlockEntity implements IUpgradeable
             }
         }
         return ret;
+    }
+
+    @Unique
+    private static long betterae2$getItemsToMove(int speedUpgrades, int superSpeedUpgrades) {
+        int result = 0;
+        int speed = 16;
+
+        if (speedUpgrades > 0 && superSpeedUpgrades == 0) {
+            switch (speedUpgrades) {
+                case 1 -> result = 2;
+                case 2 -> result = 3;
+                case 3 -> result = 4;
+                case 4 -> result = 5;
+                case 5 -> result = 6;
+            }
+        } else if (superSpeedUpgrades > 0 && speedUpgrades == 0) {
+            switch (superSpeedUpgrades) {
+                case 1 -> result = 8;
+                case 2 -> result = 9;
+                case 3 -> result = 10;
+                case 4 -> result = 11;
+                case 5 -> result = 12;
+            }
+        } else if (speedUpgrades > 0 && superSpeedUpgrades > 0) {
+            switch (speedUpgrades) {
+                case 1 -> result = 4;
+                case 2 -> result = 5;
+                case 3 -> result = 6;
+                case 4 -> result = 7;
+                case 5 -> result = 8;
+            }
+        }
+
+        long itemsToMove = (long) Math.pow(speed, result);
+        return itemsToMove;
     }
 }

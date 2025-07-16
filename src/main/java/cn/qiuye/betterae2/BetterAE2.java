@@ -32,7 +32,6 @@ public class BetterAE2 {
 
     public BetterAE2() {
         INSTANCE = this;
-        // ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BAE2Config.build());
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> modEventBus.register(BetterAE2Client.INSTANCE));
         modEventBus.addListener((RegisterEvent event) -> {
@@ -44,25 +43,16 @@ public class BetterAE2 {
                 return;
             }
 
-            // ModRegisterHandler.initBlock(ForgeRegistries.BLOCKS);
             ModRegisterHandler.initItem(ForgeRegistries.ITEMS);
-            // ModRegisterHandler.initBlockEntity(ForgeRegistries.BLOCK_ENTITY_TYPES);
-            // MenuTypeRegister.init(ForgeRegistries.MENU_TYPES);
         });
         ModRegisterHandler.init();
         modEventBus.addListener(this::clientSetup);
         modEventBus.addListener(this::commonSetup);
-        // NetworkRegister.register();
-        // CellRegister.register();
     }
 
     public static ResourceLocation id(String name) {
         return new ResourceLocation(MOD_ID, name);
     }
-
-    // public MinecraftServer getServer() {
-    // return ServerLifecycleHooks.getCurrentServer();
-    // }
 
     public void clientSetup(FMLClientSetupEvent event) {
         BetterAE2Client.INSTANCE.init();
@@ -78,9 +68,6 @@ public class BetterAE2 {
 
     private void postRegistrationInitialization() {
         UpgradesInit.init();
-        // if (Platform.isModLoaded("ae2")) {
-        // AE2CommonLoad.init();
-        // }
         if (Platform.isModLoaded("expatternprovider")) {
             EAECommonLoad.init();
         }
