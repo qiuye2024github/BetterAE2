@@ -1,4 +1,4 @@
-# BetterAE2
+# Make AE2 Better
 
 ## Make AE2 Great Again
 

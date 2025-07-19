@@ -25,7 +25,7 @@ import org.apache.logging.log4j.Logger;
 @Mod(BetterAE2.MOD_ID)
 public class BetterAE2 {
 
-    public static final String MOD_ID = "betterae2";
+    public static final String MOD_ID = "makeae2better";
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static BetterAE2 INSTANCE;
